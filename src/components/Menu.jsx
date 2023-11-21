@@ -1,7 +1,7 @@
-// src/components/Menu.tsx
+// src/components/Menu.jsx
 import React from 'react';
 
-const Menu: React.FC = () => {
+const Menu = () => {
   return (
     <div className="menu">
       <img src="caminho_da_sua_imagem.jpg" alt="Imagem" />

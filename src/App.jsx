@@ -1,11 +1,11 @@
-// src/App.tsx
+// src/App.jsx
 import React from 'react';
 import Menu from './components/Menu';
 import Destinations from './components/Destinations';
 import Login from './components/Login';
 import './App.css';
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <div className="App">
       <Menu />
@@ -14,5 +14,5 @@ const App: React.FC = () => {
     </div>
   );
 };
-//teste
+
 export default App;

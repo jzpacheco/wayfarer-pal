@@ -1,7 +1,7 @@
-// src/components/Login.tsx
+// src/components/Login.jsx
 import React from 'react';
 
-const Login: React.FC = () => {
+const Login = () => {
   // Lógica de login pode ser implementada aqui
 
   return (
