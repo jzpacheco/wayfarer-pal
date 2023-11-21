@@ -1,14 +1,8 @@
-// src/components/Destinations.tsx
+// src/components/Destinations.jsx
 import React from 'react';
 
-interface Destination {
-  id: number;
-  name: string;
-  description: string;
-}
-
-const Destinations: React.FC = () => {
-  const destinations: Destination[] = [
+const Destinations = () => {
+  const destinations = [
     { id: 1, name: 'Destino 1', description: 'Descrição do Destino 1' },
     { id: 2, name: 'Destino 2', description: 'Descrição do Destino 2' },
     // Adicione mais destinos conforme necessário
