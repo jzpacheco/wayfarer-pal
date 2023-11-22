@@ -5,7 +5,7 @@ const Menu = () => {
   return (
     <div className="menu">
       <button>Login</button>
-      <p>/n</p>
+      <p></p>
       <ul>
         <li>Opção 1</li>
         <li>Opção 2</li>
