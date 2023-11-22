@@ -1,11 +1,13 @@
 // src/components/Menu.jsx
 import React from 'react';
-import img from './images/layout02.jpg';
+import { useNavigate } from 'react-router-dom';
+
 const Menu = () => {
+  const navigate = useNavigate();
   return (
     <div className="menu">
-      <button>Login</button>
-      <p>/n</p>
+      <button onClick={() => navigate("/login")}>Login</button>
+      <p>\n</p>
       <ul>
         <li>Opção 1</li>
         <li>Opção 2</li>
