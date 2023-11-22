@@ -1,15 +1,15 @@
 // src/components/Menu.jsx
 import React from 'react';
-
+import img from './images/layout02.jpg';
 const Menu = () => {
   return (
     <div className="menu">
-      <img src="caminho_da_sua_imagem.jpg" alt="Imagem" />
+      <button>Login</button>
+      <p>/n</p>
       <ul>
         <li>Opção 1</li>
         <li>Opção 2</li>
       </ul>
-      <button>Login</button>
     </div>
   );
 };

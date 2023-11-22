@@ -1,8 +1,8 @@
 // src/App.jsx
 import React from 'react';
-import Menu from './components/Menu';
-import Destinations from './components/Destinations';
-import Login from './components/Login';
+import Menu from './components/Menu.jsx';
+import Destinations from './components/Destinations.jsx';
+import Login from './components/Login.jsx';
 import './App.css';
 
 const App = () => {
