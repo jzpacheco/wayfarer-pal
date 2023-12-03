@@ -9,8 +9,8 @@ const Menu = () => {
       <button onClick={() => navigate("/login")}>Login</button>
       <p>\n</p>
       <ul>
-        <li>Opção 1</li>
-        <li>Opção 2</li>
+        <li>TITULO DO SITE AQUI</li>
+        <li>EXPLORE VIAGENS</li>
       </ul>
     </div>
   );
