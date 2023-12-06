@@ -30,6 +30,8 @@ export default function DashboardScreen() {
     const [image, setImage] = useState('');
     const [touristSpots, setTouristSpots] = useState([]);
     const [touristSpotInput, setTouristSpotInput] = useState('');
+    const [destinations, setDestinations] = useState([]);
+    const [showDestinations, setShowDestinations] = useState(false);
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -64,6 +66,7 @@ export default function DashboardScreen() {
       const saveDestination = (destination) => {
         setDestinations([...destinations, destination]);
         closeModal();
+        setShowDestinations(true);
       };
     
       const editDestination = (index) => {
@@ -248,7 +251,7 @@ export default function DashboardScreen() {
                     <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
                         <button
                             onClick={openModal}
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            className="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded"
                         >
                             Open Modal
                         </button>
@@ -256,7 +259,10 @@ export default function DashboardScreen() {
                         {/* Modal */}
                         <Modal
                             isOpen={isModalOpen}
-                            onRequestClose={closeModal}
+                            onRequestClose={() => {
+                                closeModal();
+                                setShowDestinations(false);
+                            }}
                             contentLabel="Example Modal"
                             className="modal" // Adiciona classe para o estilo do modal
                             overlayClassName="overlay" // Adiciona classe para o estilo do overlay
@@ -271,7 +277,7 @@ export default function DashboardScreen() {
                                     <input
                                         type="text"
                                         id="destinationName"
-                                        className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                                        className="mt-1 p-2 w-full border border-gray-300 rounded-md color-black-700"
                                         value={destinationName}
                                         onChange={(e) => setDestinationName(e.target.value)}
                                     />
@@ -314,6 +320,7 @@ export default function DashboardScreen() {
                                             id="touristSpot"
                                             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                                             value={touristSpotInput}
+
                                             onChange={(e) => setTouristSpotInput(e.target.value)}
                                         />
                                         <button
@@ -348,13 +355,27 @@ export default function DashboardScreen() {
                                     Fechar Modal
                                 </button>
                                 <button
-                                    className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                                    onClick={() => alert('Implemente a lógica de envio aqui')}
+                                    className="bg-blue-500 text-black px-4 py-2 rounded-md"
+                                    onClick={() => saveDestination({ destinationName, location, touristSpots, image })}
                                 >
                                     Salvar Destino
                                 </button>
                             </div>
                         </Modal>
+                    {/* Lista de destinos */}
+                    {showDestinations && (
+                        <div className="mt-4 p-4 bg-gray-100 rounded">
+                            <h2 className="text-black font-bold mb-2">Destinos Salvos</h2>
+                            <ul>
+                                {destinations.map((destination, index) => (
+                                    <li key={index} className="text-black mb-1">
+                                        {destination.destinationName} - {destination.location}
+                                        {/* Mostrar outros detalhes do destino conforme necessário */}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )} 
                     </div>
                 </main>
             </div>

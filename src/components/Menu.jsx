@@ -7,9 +7,9 @@ const Menu = () => {
   return (
     <div className="menu">
       <button onClick={() => navigate("/login")}>Login</button>
-      <p>\n</p>
+      <p></p>
       <ul>
-        <li>TITULO DO SITE AQUI</li>
+        <li>WAYFARER-PALL SEU APP DE VIAGENS</li>
         <li>EXPLORE VIAGENS</li>
       </ul>
     </div>
