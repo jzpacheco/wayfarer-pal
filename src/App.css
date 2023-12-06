@@ -39,6 +39,8 @@ body {
   color: #F0ECE5;
   text-align: center;
   font-size: 40px;
+  background-color: rgba(60, 59, 59, 0.2);
+
 }
 
 .menu li {
