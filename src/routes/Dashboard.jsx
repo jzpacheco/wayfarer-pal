@@ -32,6 +32,7 @@ export default function DashboardScreen() {
     const [touristSpotInput, setTouristSpotInput] = useState('');
     const [destinations, setDestinations] = useState([]);
     const [showDestinations, setShowDestinations] = useState(false);
+    const [editingIndex, setEditingIndex] = useState(-1); // Inicia como -1 para indicar nenhum destino em edição
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -69,11 +70,11 @@ export default function DashboardScreen() {
         setShowDestinations(true);
       };
     
-      const editDestination = (index) => {
+      /*const editDestination = (index) => {
         // Implementar a lógica para editar o destino com base no índice
         // Você pode abrir um novo modal com os detalhes do destino para edição
         console.log('Editar destino:', destinations[index]);
-      };
+      };*/
     
       const deleteDestination = (index) => {
         // Implementar a lógica para excluir o destino com base no índice
@@ -277,7 +278,7 @@ export default function DashboardScreen() {
                                     <input
                                         type="text"
                                         id="destinationName"
-                                        className="mt-1 p-2 w-full border border-gray-300 rounded-md color-black-700"
+                                        className="mt-1 p-2 w-full border border-gray-300 text-black rounded-md color-black-700"
                                         value={destinationName}
                                         onChange={(e) => setDestinationName(e.target.value)}
                                     />
@@ -290,7 +291,7 @@ export default function DashboardScreen() {
                                     <input
                                         type="text"
                                         id="location"
-                                        className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                                        className="mt-1 p-2 w-full text-black border border-gray-300 rounded-md"
                                         value={location}
                                         onChange={(e) => setLocation(e.target.value)}
                                     />
@@ -318,7 +319,7 @@ export default function DashboardScreen() {
                                         <input
                                             type="text"
                                             id="touristSpot"
-                                            className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                                            className="mt-1 p-2 w-full border text-black border-gray-300 rounded-md"
                                             value={touristSpotInput}
 
                                             onChange={(e) => setTouristSpotInput(e.target.value)}
@@ -356,9 +357,24 @@ export default function DashboardScreen() {
                                 </button>
                                 <button
                                     className="bg-blue-500 text-black px-4 py-2 rounded-md"
-                                    onClick={() => saveDestination({ destinationName, location, touristSpots, image })}
+                                    onClick={() => {
+                                        if (editingIndex !== -1) {
+                                            const updatedDestinations = [...destinations];
+                                            updatedDestinations[editingIndex] = {
+                                                destinationName,
+                                                location,
+                                                touristSpots,
+                                                image,
+                                            };
+                                            setDestinations(updatedDestinations);
+                                            closeModal();
+                                            setEditingIndex(-1); // Reinicia o índice de edição para indicar nenhum destino em edição
+                                        } else {
+                                            saveDestination({ destinationName, location, touristSpots, image });
+                                        }
+                                    }}
                                 >
-                                    Salvar Destino
+                                    {editingIndex !== -1 ? 'Salvar Edição' : 'Salvar Destino'}
                                 </button>
                             </div>
                         </Modal>
@@ -367,12 +383,37 @@ export default function DashboardScreen() {
                         <div className="mt-4 p-4 bg-gray-100 rounded">
                             <h2 className="text-black font-bold mb-2">Destinos Salvos</h2>
                             <ul>
-                                {destinations.map((destination, index) => (
-                                    <li key={index} className="text-black mb-1">
-                                        {destination.destinationName} - {destination.location}
+                            {destinations.map((destination, index) => (
+                                <div key={index} className="text-black mb-1 flex justify-between">
+                                    <div>
+                                        <span>
+                                            {destination.destinationName} - {destination.location}
+                                        </span>
                                         {/* Mostrar outros detalhes do destino conforme necessário */}
-                                    </li>
-                                ))}
+                                    </div>
+                                    <div>
+                                        <button
+                                           onClick={() => {
+                                            setDestinationName(destination.destinationName);
+                                            setLocation(destination.location);
+                                            setTouristSpots(destination.touristSpots);
+                                            setImage(destination.image);
+                                            setEditingIndex(index);
+                                            openModal();
+                                        }}
+                                        className="bg-blue-500 hover:bg-blue-700 text-white px-3 py-1 rounded-md mr-2"
+                                    >
+                                        Editar
+                                        </button>
+                                        <button
+                                            onClick={() => deleteDestination(index)}
+                                            className="bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded-md"
+                                        >
+                                            Excluir
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
                             </ul>
                         </div>
                     )} 
